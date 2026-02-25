@@ -2,11 +2,13 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-# Install system dependencies
+# Install system dependencies + build tools for python packages
 RUN apt-get update && apt-get install -y \
     tesseract-ocr \
     libtesseract-dev \
     poppler-utils \
+    build-essential \
+    python3-dev \
     && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt .
@@ -18,5 +20,4 @@ COPY . .
 RUN mkdir -p uploads
 
 # Start using gunicorn for production
-# Render automatically provides the PORT environment variable
 CMD gunicorn -w 4 -k uvicorn.workers.UvicornWorker main:app --bind 0.0.0.0:$PORT --timeout 120
