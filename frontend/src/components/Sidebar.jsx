@@ -12,7 +12,8 @@ import {
   X,
   Bell,
   Moon,
-  Sun
+  Sun,
+  Clock
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useLanguage } from '../context/LanguageContext';
